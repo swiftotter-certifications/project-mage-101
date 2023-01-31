@@ -15,18 +15,14 @@ $viewModel = $block->getData('view_model');
 $questions = $viewModel->getQuestionsContent();
 ?>
 
+<?php if ($viewModel->enabledOnProduct()): ?>
 <div>
-    <h3><?= __('Product Questions') ?></h3>
+    <h3><?= $viewModel->getHeading() ?></h3>
 
     <?= $block->getChildHtml('post_form') ?>
 
     <?php foreach ($questions as $question): ?>
-        <article data-mage-init='{
-                "collapsible": {
-                    "animate": 500,
-                    "openedState": "active"
-                }
-            }'>
+        <article>
             <header data-role="title">
                 <p><?= nl2br($escaper->escapeHtml($question->getContent())) ?></p>
                 <aside><?= __(
@@ -62,3 +58,4 @@ $questions = $viewModel->getQuestionsContent();
         </article>
     <?php endforeach; ?>
 </div>
+<?php endif; ?>

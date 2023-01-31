@@ -9,10 +9,9 @@
     <body>
         <referenceContainer name="content">
             <block class="SwiftOtter\ProductQuestions\Block\ProductView\Questions" name="questions.tab" as="questions"
-                   after="product.info.details" template="SwiftOtter_ProductQuestions::product/view/questions.phtml">
+                   after="product.info.details" template="SwiftOtter_ProductQuestions::product/view/questions.phtml"
+                    ifconfig="catalog/questions/enabled">
                 <arguments>
-                    <argument name="sort_order" xsi:type="string">40</argument>
-                    <argument name="title" xsi:type="string">Product Questions</argument>
                     <argument name="view_model" xsi:type="object">SwiftOtter\ProductQuestions\ViewModel\ProductView\Questions</argument>
                     <argument name="date_format" xsi:type="const">IntlDateFormatter::LONG</argument>
                 </arguments>
