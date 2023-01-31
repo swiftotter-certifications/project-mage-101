@@ -57,4 +57,14 @@ $questions = $viewModel->getQuestionsContent();
         </article>
     <?php endforeach; ?>
 </div>
+
+<script type="text/x-magento-init">
+    {
+        ".product-questions": {
+            "productViewQuestions": {
+                "animationSpeed": 100
+            }
+        }
+    }
+</script>
 <?php endif; ?>

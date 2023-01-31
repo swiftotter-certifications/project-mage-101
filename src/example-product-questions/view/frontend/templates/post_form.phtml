@@ -12,12 +12,13 @@
 /** @var \SwiftOtter\ProductQuestions\ViewModel\PostForm $viewModel */
 $viewModel = $block->getViewModel();
 $parentId = $viewModel->getParentId();
+$formClass = ($parentId) ? 'answer' : 'question';
 $contentLabel = ($parentId) ? 'Answer' : 'Question';
 $submitLabel = ($parentId) ? 'Submit Answer' : 'Submit Question';
 ?>
 
 <?php if ($viewModel->customerIsLoggedIn()): ?>
-<div class="product-question-form">
+<div class="product-question-form <?= $formClass ?>">
     <form id="product_question_form<?= ($parentId) ? '_'.$parentId : '' ?>" method="post"
           action="<?= $escaper->escapeUrl($viewModel->getActionUrl()) ?>"
           data-mage-init='{"validation": {}}'>

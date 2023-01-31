@@ -7,12 +7,30 @@
 @prod-questions-color__header-bg: @color-white-dark-smoke;
 @prod-questions-color__form-bg: lighten(@theme__color__primary, 50%);
 @prod-questions-color__nickname: lighten(@theme__color__primary, 20%);
+@prod-questions-size__header: 1.6rem;
+@prod-questions-size__aside: 1.3rem;
 
 & when (@media-common = true) {
     .product-questions {
         .nickname {
             color: @prod-questions-color__nickname;
             font-weight: bold;
+        }
+
+        .form-show {
+            margin: @indent__m;
+
+            span {
+                .lib-icon-font(
+                    @icon-expand,
+                    @_icon-font-size: 12px,
+                    @_icon-font-position: after
+                );
+
+                &:after {
+                    padding-left: 5px;
+                }
+            }
         }
     }
 
@@ -22,12 +40,13 @@
 
         header {
             background-color: @prod-questions-color__header-bg;
-            font-size: 1.6rem;
+            font-size: @prod-questions-size__header;
             font-weight: bold;
             padding: @indent__s;
+            position: relative;
 
             aside {
-                font-size: 1.3rem;
+                font-size: @prod-questions-size__aside;
                 font-weight: normal;
                 text-align: right;
             }
@@ -37,6 +56,30 @@
             padding: @indent__m @indent__l;
             border-top: 1px solid @prod-questions-color__borders;
         }
+
+        &.collapsible {
+            header {
+                cursor: pointer;
+                padding-right: 18px;
+
+                .indicator {
+                    position: absolute;
+                    top: 3px;
+                    right: 3px;
+                    .lib-icon-font(
+                        @icon-pointer-down,
+                        @_icon-font-size: 18px,
+                        @_icon-font-position: after
+                    );
+                }
+            }
+
+            &.active {
+                header .indicator:after {
+                    content: @icon-pointer-up;
+                }
+            }
+        }
     }
 
     .product-answer {
@@ -44,19 +87,30 @@
         padding: @indent__m;
 
         aside {
-            font-size: 1.3rem;
+            font-size: @prod-questions-size__aside;
             padding-left: @indent__l;
         }
     }
 
     .product-question-form {
-        width: 60%;
         background-color: @prod-questions-color__form-bg;
         padding: @indent__m;
-        margin: @indent__l auto @indent__l (@indent__l * 2);
 
         .actions {
             text-align: right;
         }
+    }
+}
+
+@media all and (min-width: @screen__m) {
+    .product-question-form {
+        width: 80%;
+        margin: @indent__l auto @indent__l (@indent__l * 2);
+    }
+}
+
+@media all and (min-width: @screen__l) {
+    .product-question-form {
+        width: 60%;
     }
 }
