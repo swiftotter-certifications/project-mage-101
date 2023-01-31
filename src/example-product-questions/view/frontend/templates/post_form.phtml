@@ -17,8 +17,8 @@ $submitLabel = ($parentId) ? 'Submit Answer' : 'Submit Question';
 ?>
 
 <?php if ($viewModel->customerIsLoggedIn()): ?>
-<div>
-    <form class="product-question-form" id="product_question_form<?= ($parentId) ? '_'.$parentId : '' ?>" method="post"
+<div class="product-question-form">
+    <form id="product_question_form<?= ($parentId) ? '_'.$parentId : '' ?>" method="post"
           action="<?= $escaper->escapeUrl($viewModel->getActionUrl()) ?>"
           data-mage-init='{"validation": {}}'>
 
@@ -48,7 +48,7 @@ $submitLabel = ($parentId) ? 'Submit Answer' : 'Submit Question';
             </div>
         </fieldset>
 
-        <div class="primary actions-primary">
+        <div class="primary actions">
             <button type="submit" class="action submit primary"><span><?= $escaper->escapeHtml(__($submitLabel)) ?></span></button>
         </div>
     </form>

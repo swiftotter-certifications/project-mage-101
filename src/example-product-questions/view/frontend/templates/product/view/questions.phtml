@@ -16,18 +16,18 @@ $questions = $viewModel->getQuestionsContent();
 ?>
 
 <?php if ($viewModel->enabledOnProduct()): ?>
-<div>
+<div class="product-questions">
     <h3><?= $viewModel->getHeading() ?></h3>
 
     <?= $block->getChildHtml('post_form') ?>
 
     <?php foreach ($questions as $question): ?>
-        <article>
+        <article class="product-question">
             <header data-role="title">
                 <p><?= nl2br($escaper->escapeHtml($question->getContent())) ?></p>
                 <aside><?= __(
-    'Asked by user <span>%1</span> on %2',
-    $escaper->escapeHtml($question->getCustomerNickname()),
+    'Asked by user %1 on %2',
+    '<span class="nickname">' . $escaper->escapeHtml($question->getCustomerNickname()) . '</span>',
     $escaper->escapeHtml(
         $block->formatDate(
             $question->getUpdatedAt()
@@ -35,15 +35,14 @@ $questions = $viewModel->getQuestionsContent();
     )
 ) ?></aside>
             </header>
-            <div data-role="content">
-                <h4><?= __('Answers') ?></h4>
+            <div class="question-content" data-role="content">
                 <?php $answers = $question->getAnswers() ?? []; ?>
                 <?php foreach ($answers as $answer): ?>
-                <section>
+                <section class="product-answer">
                     <p><?= nl2br($escaper->escapeHtml($answer->getContent())) ?></p>
                     <aside><?= __(
-    'Answered by user <span>%1</span> on %2',
-    $escaper->escapeHtml($answer->getCustomerNickname()),
+    'Answered by user %1 on %2',
+    '<span class="nickname">' . $escaper->escapeHtml($answer->getCustomerNickname()) . '</span>',
     $escaper->escapeHtml(
         $block->formatDate(
             $answer->getUpdatedAt()

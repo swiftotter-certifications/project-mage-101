@@ -1,0 +1,62 @@
+// /**
+// * @by SwiftOtter, Inc.
+// * @website https://swiftotter.com
+// **/
+
+@prod-questions-color__borders: @color-gray-darken3;
+@prod-questions-color__header-bg: @color-white-dark-smoke;
+@prod-questions-color__form-bg: lighten(@theme__color__primary, 50%);
+@prod-questions-color__nickname: lighten(@theme__color__primary, 20%);
+
+& when (@media-common = true) {
+    .product-questions {
+        .nickname {
+            color: @prod-questions-color__nickname;
+            font-weight: bold;
+        }
+    }
+
+    .product-question {
+        margin: @indent__m auto;
+        border: 1px solid @prod-questions-color__borders;
+
+        header {
+            background-color: @prod-questions-color__header-bg;
+            font-size: 1.6rem;
+            font-weight: bold;
+            padding: @indent__s;
+
+            aside {
+                font-size: 1.3rem;
+                font-weight: normal;
+                text-align: right;
+            }
+        }
+
+        .question-content {
+            padding: @indent__m @indent__l;
+            border-top: 1px solid @prod-questions-color__borders;
+        }
+    }
+
+    .product-answer {
+        border-bottom: 1px solid @prod-questions-color__borders;
+        padding: @indent__m;
+
+        aside {
+            font-size: 1.3rem;
+            padding-left: @indent__l;
+        }
+    }
+
+    .product-question-form {
+        width: 60%;
+        background-color: @prod-questions-color__form-bg;
+        padding: @indent__m;
+        margin: @indent__l auto @indent__l (@indent__l * 2);
+
+        .actions {
+            text-align: right;
+        }
+    }
+}
