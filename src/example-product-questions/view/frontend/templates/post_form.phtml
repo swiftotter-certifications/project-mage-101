@@ -1,0 +1,56 @@
+<?php
+/**
+ * @by SwiftOtter, Inc.
+ * @website https://swiftotter.com
+ **/
+
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+/** @var \SwiftOtter\ProductQuestions\ViewModel\PostForm $viewModel */
+$viewModel = $block->getViewModel();
+$parentId = $viewModel->getParentId();
+$contentLabel = ($parentId) ? 'Answer' : 'Question';
+$submitLabel = ($parentId) ? 'Submit Answer' : 'Submit Question';
+?>
+
+<?php if ($viewModel->customerIsLoggedIn()): ?>
+<div>
+    <form class="product-question-form" id="product_question_form<?= ($parentId) ? '_'.$parentId : '' ?>" method="post"
+          action="<?= $escaper->escapeUrl($viewModel->getActionUrl()) ?>"
+          data-mage-init='{"validation": {}}'>
+
+        <input type="hidden" name="product_id" value="<?= $escaper->escapeHtmlAttr((string) $viewModel->getProductId()) ?>" />
+        <?php if ($parentId): ?>
+            <input type="hidden" name="parent_id" value="<?= $escaper->escapeHtmlAttr((string) $parentId) ?>" />
+        <?php endif; ?>
+
+        <fieldset class="fieldset" data-hasrequired="<?= $escaper->escapeHtmlAttr(__('* Required Fields')) ?>">
+            <div class="field required">
+                <label for="question_customer_nickname<?= ($parentId) ? '_'.$parentId : '' ?>" class="label">
+                    <span><?= $escaper->escapeHtml(__('Nickname')) ?></span>
+                </label>
+                <div class="control">
+                    <input type="text" name="customer_nickname" id="question_customer_nickname<?= ($parentId) ? '_'.$parentId : '' ?>"
+                           class="input-text" data-validate="{required:true}" />
+                </div>
+            </div>
+            <div class="field required">
+                <label for="question_content<?= ($parentId) ? '_'.$parentId : '' ?>" class="label">
+                    <span><?= $escaper->escapeHtml(__($contentLabel)) ?></span>
+                </label>
+                <div class="control">
+                    <textarea name="content" id="question_content<?= ($parentId) ? '_'.$parentId : '' ?>"
+                              class="input-text" data-validate="{required:true}"></textarea>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="primary actions-primary">
+            <button type="submit" class="action submit primary"><span><?= $escaper->escapeHtml(__($submitLabel)) ?></span></button>
+        </div>
+    </form>
+</div>
+<?php endif; ?>

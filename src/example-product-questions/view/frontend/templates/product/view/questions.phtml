@@ -1,0 +1,64 @@
+<?php
+/**
+ * @by SwiftOtter, Inc.
+ * @website https://swiftotter.com
+ **/
+
+/**
+ * @var \SwiftOtter\ProductQuestions\Block\ProductView\Questions $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+/** @var SwiftOtter\ProductQuestions\ViewModel\ProductView\Questions $viewModel */
+$viewModel = $block->getData('view_model');
+
+$questions = $viewModel->getQuestionsContent();
+?>
+
+<div>
+    <h3><?= __('Product Questions') ?></h3>
+
+    <?= $block->getChildHtml('post_form') ?>
+
+    <?php foreach ($questions as $question): ?>
+        <article data-mage-init='{
+                "collapsible": {
+                    "animate": 500,
+                    "openedState": "active"
+                }
+            }'>
+            <header data-role="title">
+                <p><?= nl2br($escaper->escapeHtml($question->getContent())) ?></p>
+                <aside><?= __(
+    'Asked by user <span>%1</span> on %2',
+    $escaper->escapeHtml($question->getCustomerNickname()),
+    $escaper->escapeHtml(
+        $block->formatDate(
+            $question->getUpdatedAt()
+        )
+    )
+) ?></aside>
+            </header>
+            <div data-role="content">
+                <h4><?= __('Answers') ?></h4>
+                <?php $answers = $question->getAnswers() ?? []; ?>
+                <?php foreach ($answers as $answer): ?>
+                <section>
+                    <p><?= nl2br($escaper->escapeHtml($answer->getContent())) ?></p>
+                    <aside><?= __(
+    'Answered by user <span>%1</span> on %2',
+    $escaper->escapeHtml($answer->getCustomerNickname()),
+    $escaper->escapeHtml(
+        $block->formatDate(
+            $answer->getUpdatedAt()
+        )
+    )
+) ?></aside>
+                </section>
+                <?php endforeach; ?>
+
+                <?= $block->getPostFormHtml($question->getId()) ?>
+            </div>
+        </article>
+    <?php endforeach; ?>
+</div>
