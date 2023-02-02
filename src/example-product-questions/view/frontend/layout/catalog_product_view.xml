@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @by SwiftOtter, Inc.
+ * @website https://swiftotter.com
+ **/
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block name="questions.tab" as="questions"
+                   after="product.info.details" template="SwiftOtter_ProductQuestions::product/view/questions.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">SwiftOtter\ProductQuestions\ViewModel\ProductView\Questions</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>
