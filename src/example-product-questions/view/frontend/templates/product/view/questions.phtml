@@ -6,10 +6,15 @@
 
 /**
  * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
  */
 
 /** @var SwiftOtter\ProductQuestions\ViewModel\ProductView\Questions $viewModel */
 $viewModel = $block->getData('view_model');
 ?>
 
-<h3><?= $viewModel->getHeading() ?></h3>
+<div class="product-questions">
+    <h3><?= $escaper->escapeHtml($viewModel->getHeading()) ?></h3>
+
+    <?= $block->getChildHtml('post_form') ?>
+</div>
