@@ -1,4 +1,8 @@
 <?php
+/**
+ * @by SwiftOtter, Inc.
+ * @website https://swiftotter.com
+ **/
 declare(strict_types=1);
 
 namespace SwiftOtter\ProductQuestions\Command;

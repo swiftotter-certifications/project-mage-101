@@ -1,43 +1,37 @@
 <?php
+/**
+ * @by SwiftOtter, Inc.
+ * @website https://swiftotter.com
+ **/
 declare(strict_types=1);
 
 namespace SwiftOtter\ProductQuestions\Command;
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
-use Magento\Framework\App\RequestInterface;
-use Magento\Framework\Data\Form\FormKey\Validator;
 use Magento\Framework\Exception\AuthorizationException;
 use Magento\Framework\Exception\InputException;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use SwiftOtter\ProductQuestions\Model\Post;
 
-class ValidatePostFromRequest
+class ValidatePost
 {
     private array $requiredFields = ['customer_nickname', 'content', 'product_id'];
 
-    private Validator $formKeyValidator;
     private ProductRepositoryInterface $productRepository;
 
     public function __construct(
-        Validator $formKeyValidator,
         ProductRepositoryInterface $productRepository
     ) {
-        $this->formKeyValidator = $formKeyValidator;
         $this->productRepository = $productRepository;
     }
 
     /**
      * @throws AuthorizationException
      * @throws InputException
-     * @throws LocalizedException
+     * @throws NoSuchEntityException
      */
-    public function execute(Post $post, RequestInterface $request): bool
+    public function execute(Post $post): bool
     {
-        if (!$this->formKeyValidator->validate($request)) {
-            throw new InputException(__('Invalid form data'));
-        }
-
         if (!$post->getCustomerId()) {
             throw new AuthorizationException(__('You must be logged in to post a product question or answer'));
         }
@@ -56,7 +50,7 @@ class ValidatePostFromRequest
             try {
                 $this->productRepository->getById((int)$post->getProductId());
             } catch (NoSuchEntityException $e) {
-                throw new LocalizedException(__('The product associated with the post was not found'));
+                throw new NoSuchEntityException(__('The product associated with the post was not found'));
             }
         }
 
