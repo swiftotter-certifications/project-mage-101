@@ -7,21 +7,21 @@ declare(strict_types=1);
 
 namespace SwiftOtter\ProductQuestions\ViewModel\ProductView;
 
-use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
+use SwiftOtter\ProductQuestions\Model\Config;
 
 class Questions implements ArgumentInterface
 {
-    private ScopeConfigInterface $scopeConfig;
+    private Config $config;
 
     public function __construct(
-        ScopeConfigInterface $scopeConfig
+        Config $config
     ) {
-        $this->scopeConfig = $scopeConfig;
+        $this->config = $config;
     }
 
     public function getHeading(): string
     {
-        return 'Hello world from ' . $this->scopeConfig->getValue('web/secure/base_url');
+        return $this->config->getHeading();
     }
 }

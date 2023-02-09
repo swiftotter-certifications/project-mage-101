@@ -9,7 +9,8 @@
     <body>
         <referenceContainer name="content">
             <block name="questions.tab" as="questions"
-                   after="product.info.details" template="SwiftOtter_ProductQuestions::product/view/questions.phtml">
+                   after="product.info.details" template="SwiftOtter_ProductQuestions::product/view/questions.phtml"
+                    ifconfig="catalog/questions/enabled">
                 <arguments>
                     <argument name="view_model" xsi:type="object">SwiftOtter\ProductQuestions\ViewModel\ProductView\Questions</argument>
                 </arguments>
