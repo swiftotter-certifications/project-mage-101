@@ -6,7 +6,6 @@ namespace SwiftOtter\ProductQuestions\Command;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Customer\Model\Session;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use SwiftOtter\ProductQuestions\Model\Post;
 use SwiftOtter\ProductQuestions\Model\PostFactory;
@@ -28,7 +27,7 @@ class InitPostFromRequest
     }
 
     /**
-     * @throws LocalizedException
+     * @throws NoSuchEntityException
      */
     public function execute(array $data, bool $attachProduct = false): Post
     {
@@ -52,7 +51,7 @@ class InitPostFromRequest
     }
 
     /**
-     * @throws LocalizedException
+     * @throws NoSuchEntityException
      */
     private function getProduct(array $data): ?ProductInterface
     {
@@ -63,7 +62,7 @@ class InitPostFromRequest
         try {
             $product = $this->productRepository->getById((int)$data['product_id']);
         } catch (NoSuchEntityException $e) {
-            throw new LocalizedException(__('The product associated with the post was not found'));
+            throw new NoSuchEntityException(__('The product associated with the post was not found'));
         }
 
         return $product;
