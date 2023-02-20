@@ -1,1 +1,42 @@
-This is a form.
+<?php
+/**
+ * @by SwiftOtter, Inc.
+ * @website https://swiftotter.com
+ **/
+
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+
+<div class="product-question-form">
+    <form id="product_question_form" method="post">
+        <fieldset class="fieldset">
+            <div class="field">
+                <label for="question_customer_nickname" class="label">
+                    <span><?= $escaper->escapeHtml(__('Nickname')) ?></span>
+                </label>
+                <div class="control">
+                    <input type="text" name="customer_nickname"
+                           id="question_customer_nickname" class="input-text" />
+                </div>
+            </div>
+            <div class="field">
+                <label for="question_content" class="label">
+                    <span><?= $escaper->escapeHtml(__('Question')) ?></span>
+                </label>
+                <div class="control">
+                    <textarea name="content" id="question_content"
+                              class="input-text"></textarea>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="primary actions">
+            <button type="submit" class="action submit primary">
+                <span><?= $escaper->escapeHtml(__('Submit Question')) ?></span>
+            </button>
+        </div>
+    </form>
+</div>
