@@ -28,7 +28,7 @@ $dateFormat = $block->getDateFormat() ?? \IntlDateFormatter::SHORT;
                 <aside><?= __(
                     'Asked by user %1 on %2',
                     '<span class="nickname">' . $escaper->escapeHtml($question->getCustomerNickname()) . '</span>',
-                    $escaper->escapeHtml($block->formatDate($question->getUpdatedAt(), $dateFormat))
+                    $escaper->escapeHtml($block->formatDate($question->getCreatedAt(), $dateFormat))
                 ) ?></aside>
             </header>
             <div class="question-content">
@@ -39,7 +39,7 @@ $dateFormat = $block->getDateFormat() ?? \IntlDateFormatter::SHORT;
                         <aside><?= __(
                             'Answered by user %1 on %2',
                             '<span class="nickname">' . $escaper->escapeHtml($answer->getCustomerNickname()) . '</span>',
-                            $escaper->escapeHtml($block->formatDate($answer->getUpdatedAt(), $dateFormat))
+                            $escaper->escapeHtml($block->formatDate($answer->getCreatedAt(), $dateFormat))
                         ) ?></aside>
                     </section>
                 <?php endforeach; ?>

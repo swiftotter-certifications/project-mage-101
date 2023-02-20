@@ -50,7 +50,7 @@ class Questions implements ArgumentInterface
         $postCollection->addProductIdFilter((int) $product->getId())
             ->addQuestionsOnlyFilter()
             ->addAnswers()
-            ->addOrder('updated_at', 'DESC');
+            ->addOrder('created_at', 'DESC');
 
         return $postCollection->getItems();
     }

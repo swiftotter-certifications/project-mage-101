@@ -82,7 +82,7 @@ class Collection extends AbstractCollection
             /** @var Collection $answersCollection */
             $answerPosts = $this->postCollectionFactory->create();
             $answerPosts->addAnswersOnlyFilter($ids)
-                ->addOrder('updated_at', 'DESC');
+                ->addOrder('created_at', 'DESC');
 
             $answersByQuestionId = [];
             foreach ($answerPosts as $answer) {
