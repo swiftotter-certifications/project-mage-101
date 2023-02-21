@@ -15,7 +15,11 @@
                     <argument name="view_model" xsi:type="object">SwiftOtter\ProductQuestions\ViewModel\ProductView\Questions</argument>
                 </arguments>
                 <block name="questions.post_form" as="post_form"
-                       template="SwiftOtter_ProductQuestions::post_form.phtml" />
+                       template="SwiftOtter_ProductQuestions::post_form.phtml">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">SwiftOtter\ProductQuestions\ViewModel\PostForm</argument>
+                    </arguments>
+                </block>
             </block>
         </referenceContainer>
     </body>

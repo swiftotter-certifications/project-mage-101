@@ -8,10 +8,19 @@
  * @var \Magento\Framework\View\Element\Template $block
  * @var \Magento\Framework\Escaper $escaper
  */
+
+/** @var \SwiftOtter\ProductQuestions\ViewModel\PostForm $viewModel */
+$viewModel = $block->getData('view_model');
 ?>
 
+<?php if ($viewModel->customerIsLoggedIn()): ?>
 <div class="product-question-form">
-    <form id="product_question_form" method="post">
+    <form id="product_question_form" method="post"
+          action="<?= $escaper->escapeUrl($viewModel->getActionUrl()) ?>">
+
+        <input type="hidden" name="product_id"
+               value="<?= $escaper->escapeHtmlAttr($viewModel->getProductId()) ?>" />
+
         <fieldset class="fieldset">
             <div class="field">
                 <label for="question_customer_nickname" class="label">
@@ -40,3 +49,4 @@
         </div>
     </form>
 </div>
+<?php endif; ?>
