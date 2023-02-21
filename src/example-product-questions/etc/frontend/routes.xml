@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @by SwiftOtter, Inc.
+ * @website https://swiftotter.com
+ **/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route id="productquestions" frontName="productquestions">
+            <module name="SwiftOtter_ProductQuestions" />
+        </route>
+    </router>
+</config>
