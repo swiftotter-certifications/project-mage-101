@@ -13,6 +13,7 @@
                     ifconfig="catalog/questions/enabled">
                 <arguments>
                     <argument name="view_model" xsi:type="object">SwiftOtter\ProductQuestions\ViewModel\ProductView\Questions</argument>
+                    <argument name="date_format" xsi:type="const">IntlDateFormatter::LONG</argument>
                 </arguments>
                 <block name="questions.post_form" as="post_form"
                        template="SwiftOtter_ProductQuestions::post_form.phtml">
