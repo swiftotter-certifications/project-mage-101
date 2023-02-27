@@ -14,8 +14,11 @@ use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\Response\RedirectInterface;
 use Magento\Framework\Controller\Result\Redirect;
 use Magento\Framework\Controller\Result\RedirectFactory;
+use Magento\Framework\Data\Form\FormKey\Validator;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Message\Manager;
 use SwiftOtter\ProductQuestions\Command\InitPostFromRequest;
+use SwiftOtter\ProductQuestions\Command\ValidatePost;
 use SwiftOtter\ProductQuestions\Model\ResourceModel\Post as PostResource;
 
 class Create implements ActionInterface, HttpPostActionInterface
@@ -25,19 +28,28 @@ class Create implements ActionInterface, HttpPostActionInterface
     private InitPostFromRequest $initPostFromRequest;
     private RequestInterface $request;
     private PostResource $postResource;
+    private ValidatePost $validatePost;
+    private Manager $messageManager;
+    private Validator $formKeyValidator;
 
     public function __construct(
         RedirectFactory $redirectFactory,
         RedirectInterface $redirect,
         InitPostFromRequest $initPostFromRequest,
         RequestInterface $request,
-        PostResource $postResource
+        PostResource $postResource,
+        ValidatePost $validatePost,
+        Manager $messageManager,
+        Validator $formKeyValidator
     ) {
         $this->redirectFactory = $redirectFactory;
         $this->redirect = $redirect;
         $this->initPostFromRequest = $initPostFromRequest;
         $this->request = $request;
         $this->postResource = $postResource;
+        $this->validatePost = $validatePost;
+        $this->messageManager = $messageManager;
+        $this->formKeyValidator = $formKeyValidator;
     }
 
     /**
@@ -45,18 +57,19 @@ class Create implements ActionInterface, HttpPostActionInterface
      */
     public function execute()
     {
-        // TODO Validation
-
         $data = $this->request->getParams();
 
         try {
             $post = $this->initPostFromRequest->execute($data, true);
-            $this->postResource->save($post);
-            // TODO Success message
+            if ($this->validatePost->execute($post)
+                && $this->validateFormKey()) {
+                $this->postResource->save($post);
+                $this->messageManager->addSuccessMessage(__('You have successfully submitted your post.'));
+            }
         } catch (LocalizedException $e) {
-            // TODO Error message
+            $this->messageManager->addErrorMessage($e->getMessage());
         } catch (\Exception $e) {
-            // TODO Error message
+            $this->messageManager->addErrorMessage(__('An unexpected error occurred.'));
         }
 
         /** @var Redirect $redirect */
@@ -64,5 +77,11 @@ class Create implements ActionInterface, HttpPostActionInterface
         $redirect->setUrl($this->redirect->getRefererUrl());
 
         return $redirect;
+    }
+
+    private function validateFormKey(): bool
+    {
+        $this->formKeyValidator->validate($this->request);
+        return true;
     }
 }
