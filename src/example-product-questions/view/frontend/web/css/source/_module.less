@@ -11,6 +11,19 @@
             color: @prod-questions-color__nickname;
             font-weight: bold;
         }
+
+        .form-show {
+            margin: @indent__m;
+
+            span {
+                .lib-icon-font(
+                    @icon-expand,
+                    @_icon-font-size: 12px,
+                    @_icon-font-position: after,
+                    @_icon-font-margin: 5px
+                );
+            }
+        }
     }
 
     .product-question {
@@ -34,6 +47,30 @@
         .question-content {
             padding: @indent__m @indent__l;
             border-top: 1px solid @prod-questions-color__borders;
+        }
+
+        &.collapsible {
+            header {
+                cursor: pointer;
+                padding-right: 18px;
+
+                .indicator {
+                    position: absolute;
+                    top: 3px;
+                    right: 3px;
+                    .lib-icon-font(
+                        @icon-pointer-down,
+                        @_icon-font-size: 18px,
+                        @_icon-font-position: after
+                    );
+                }
+            }
+
+            &.active {
+                header .indicator:after {
+                    content: @icon-pointer-up;
+                }
+            }
         }
     }
 
