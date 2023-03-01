@@ -13,16 +13,24 @@ use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use SwiftOtter\ProductQuestions\Model\Post;
+use SwiftOtter\ProductQuestions\Model\PostFactory;
+use SwiftOtter\ProductQuestions\Model\ResourceModel\Post as PostResource;
 
 class ValidatePost
 {
     private array $requiredFields = ['customer_nickname', 'content', 'product_id'];
     private ProductRepositoryInterface $productRepository;
+    private PostFactory $postFactory;
+    private PostResource $postResource;
 
     public function __construct(
-        ProductRepositoryInterface $productRepository
+        ProductRepositoryInterface $productRepository,
+        PostFactory $postFactory,
+        PostResource $postResource
     ) {
         $this->productRepository = $productRepository;
+        $this->postFactory = $postFactory;
+        $this->postResource = $postResource;
     }
 
     /**
@@ -59,6 +67,23 @@ class ValidatePost
             }
         }
 
+        if (!$this->checkParentPost($post)) {
+            throw new NoSuchEntityException(__('The associated product question was not found.'));
+        }
+
         return true;
+    }
+
+    private function checkParentPost(Post $post): bool
+    {
+        $parentId = $post->getParentId();
+        if (!$parentId) {
+            return true;
+        }
+
+        /** @var Post $parentPost */
+        $parentPost = $this->postFactory->create();
+        $this->postResource->load($parentPost, $parentId);
+        return (bool) $parentPost->getId();
     }
 }
