@@ -8,7 +8,8 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
-            <block name="questions.tab" as="questions"
+            <block class="SwiftOtter\ProductQuestions\Block\ProductView\Questions"
+                   name="questions.tab" as="questions"
                    after="product.info.details" template="SwiftOtter_ProductQuestions::product/view/questions.phtml"
                     ifconfig="catalog/questions/enabled">
                 <arguments>

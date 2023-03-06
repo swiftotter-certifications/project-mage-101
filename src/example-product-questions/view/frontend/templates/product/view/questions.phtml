@@ -5,7 +5,7 @@
  **/
 
 /**
- * @var \Magento\Framework\View\Element\Template $block
+ * @var \SwiftOtter\ProductQuestions\Block\ProductView\Questions $block
  * @var \Magento\Framework\Escaper $escaper
  */
 
@@ -43,6 +43,8 @@ $dateFormat = $block->getData('date_format') ?? \IntlDateFormatter::SHORT;
                         ) ?></aside>
                     </section>
                 <?php endforeach; ?>
+
+                <?= $block->getPostFormHtml((int) $question->getId()) ?>
             </div>
         </article>
     <?php endforeach; ?>
