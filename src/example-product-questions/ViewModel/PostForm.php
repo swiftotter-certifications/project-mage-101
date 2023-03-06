@@ -17,6 +17,7 @@ use Magento\Framework\App\Http\Context;
 class PostForm implements ArgumentInterface
 {
     private ?Product $product = null;
+    private ?int $parentId = null;
 
     private UrlInterface $url;
     private Registry $coreRegistry;
@@ -46,6 +47,34 @@ class PostForm implements ArgumentInterface
     {
         $product = $this->getProduct();
         return (string) $product->getId() ?? '';
+    }
+
+    public function setParentId(int $id): PostForm
+    {
+        $this->parentId = $id;
+        return $this;
+    }
+
+    public function getParentId(): ?int
+    {
+        return $this->parentId;
+    }
+
+    public function getCssClass(): string
+    {
+        return ($this->getParentId()) ? 'answer' : 'question';
+    }
+
+    public function getContentLabel(): string
+    {
+        $label = ($this->getParentId()) ? __('Answer') : __('Question');
+        return $label->render();
+    }
+
+    public function getSubmitLabel(): string
+    {
+        $label = ($this->getParentId()) ? __('Submit Answer') : __('Submit Question');
+        return $label->render();
     }
 
     private function getProduct(): ?Product

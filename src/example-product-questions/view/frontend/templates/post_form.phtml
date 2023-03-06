@@ -11,32 +11,38 @@
 
 /** @var \SwiftOtter\ProductQuestions\ViewModel\PostForm $viewModel */
 $viewModel = $block->getData('view_model');
+$parentId = $escaper->escapeHtmlAttr((string) $viewModel->getParentId());
+$parentIdSuffix = ($parentId) ? '_'.$parentId : '';
 ?>
 
 <?php if ($viewModel->customerIsLoggedIn()): ?>
-<div class="product-question-form">
-    <form id="product_question_form" method="post"
+<div class="product-question-form <?= $escaper->escapeHtmlAttr($viewModel->getCssClass()) ?>">
+    <form id="product_question_form<?= $parentIdSuffix ?>" method="post"
           action="<?= $escaper->escapeUrl($viewModel->getActionUrl()) ?>">
 
         <input type="hidden" name="product_id"
                value="<?= $escaper->escapeHtmlAttr($viewModel->getProductId()) ?>" />
+        <?php if ($parentId): ?>
+            <input type="hidden" name="parent_id"
+                   value="<?= $escaper->escapeHtmlAttr($parentId) ?>" />
+        <?php endif; ?>
 
         <fieldset class="fieldset">
             <div class="field">
-                <label for="question_customer_nickname" class="label">
+                <label for="question_customer_nickname<?= $parentIdSuffix ?>" class="label">
                     <span><?= $escaper->escapeHtml(__('Nickname')) ?></span>
                 </label>
                 <div class="control">
                     <input type="text" name="customer_nickname"
-                           id="question_customer_nickname" class="input-text" />
+                           id="question_customer_nickname<?= $parentIdSuffix ?>" class="input-text" />
                 </div>
             </div>
             <div class="field">
-                <label for="question_content" class="label">
-                    <span><?= $escaper->escapeHtml(__('Question')) ?></span>
+                <label for="question_content<?= $parentIdSuffix ?>" class="label">
+                    <span><?= $escaper->escapeHtml($viewModel->getContentLabel()) ?></span>
                 </label>
                 <div class="control">
-                    <textarea name="content" id="question_content"
+                    <textarea name="content" id="question_content<?= $parentIdSuffix ?>"
                               class="input-text"></textarea>
                 </div>
             </div>
@@ -44,7 +50,7 @@ $viewModel = $block->getData('view_model');
 
         <div class="primary actions">
             <button type="submit" class="action submit primary">
-                <span><?= $escaper->escapeHtml(__('Submit Question')) ?></span>
+                <span><?= $escaper->escapeHtml($viewModel->getSubmitLabel()) ?></span>
             </button>
         </div>
     </form>
