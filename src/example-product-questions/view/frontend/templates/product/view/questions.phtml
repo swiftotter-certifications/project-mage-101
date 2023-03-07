@@ -22,7 +22,7 @@ $dateFormat = $block->getData('date_format') ?? \IntlDateFormatter::SHORT;
     <?= $block->getChildHtml('post_form') ?>
 
     <?php foreach ($questions as $question): ?>
-        <article class="product-question" style="border: 1px solid #aaa;">
+        <article class="product-question">
             <header>
                 <p><?= nl2br($escaper->escapeHtml($question->getContent())) ?></p>
                 <aside><?= __(
