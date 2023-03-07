@@ -1,8 +1,34 @@
-.product-question {
-    margin: 50px auto;
-    border: 1px solid #0000AA;
+& when (@media-common = true) {
+    .product-questions {
+        h3 {
+            .lib-icon-font(
+                @_icon-font-content: @icon-flag,
+                @_icon-font-size: 16px,
+                @_icon-font-position: after,
+                @_icon-font-margin: 10px
+            );
+        }
+    }
+
+    .product-question {
+        margin: @indent__m auto;
+        border: 1px solid #0000AA;
+    }
+
+    .product-question-form {
+        background-color: #EEEEEE;
+    }
 }
 
-.product-question-form {
-    background-color: #EEEEEE;
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .product-question-form {
+        width: 80%;
+        margin: @indent__l auto;
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .product-question-form {
+        width: 60%;
+    }
 }
