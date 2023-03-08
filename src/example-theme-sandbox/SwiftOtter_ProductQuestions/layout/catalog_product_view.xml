@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @by SwiftOtter, Inc.
+ * @website https://swiftotter.com
+ **/
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <move element="questions.tab" after="-" destination="product.info.main" />
+
+        <referenceBlock name="questions.tab">
+            <block name="questions.disclaimer" class="Magento\Cms\Block\BlockByIdentifier">
+                <arguments>
+                    <argument name="identifier" xsi:type="string">product-questions-disclaimer</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>
