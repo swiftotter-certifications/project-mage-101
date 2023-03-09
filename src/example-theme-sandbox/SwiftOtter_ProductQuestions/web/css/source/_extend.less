@@ -1,0 +1,22 @@
+& when (@media-common = true) {
+    .product-question {
+        .question-content {
+            aside {
+                font-size: @prod-questions-size__header * 0.95;
+                border-bottom: 1px solid @prod-questions-color__borders;
+                margin-bottom: @indent__l;
+            }
+        }
+    }
+
+    .product-answers {
+        .aside {
+            font-style: italic;
+
+            .nickname {
+                color: @primary__color;
+                font-weight: normal;
+            }
+        }
+    }
+}
