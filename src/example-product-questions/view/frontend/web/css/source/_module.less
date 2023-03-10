@@ -1,33 +1,70 @@
+@prod-questions-color__borders: @color-gray-darken3;
+@prod-questions-color__header-bg: @color-white-dark-smoke;
+@prod-questions-color__form-bg: lighten(@theme__color__primary, 50%);
+@prod-questions-color__nickname: lighten(@theme__color__primary, 20%);
+@prod-questions-size__header: 1.6rem;
+@prod-questions-size__aside: 1.3rem;
+
 & when (@media-common = true) {
     .product-questions {
-        h3 {
-            .lib-icon-font(
-                @_icon-font-content: @icon-flag,
-                @_icon-font-size: 16px,
-                @_icon-font-position: after,
-                @_icon-font-margin: 10px
-            );
+        .nickname {
+            color: @prod-questions-color__nickname;
+            font-weight: bold;
         }
     }
 
     .product-question {
         margin: @indent__m auto;
-        border: 1px solid #0000AA;
+        border: 1px solid @prod-questions-color__borders;
+
+        header {
+            background-color: @prod-questions-color__header-bg;
+            font-size: @prod-questions-size__header;
+            font-weight: bold;
+            padding: @indent__s;
+            position: relative;
+
+            aside {
+                font-size: @prod-questions-size__aside;
+                font-weight: normal;
+                text-align: right;
+            }
+        }
+
+        .question-content {
+            padding: @indent__m @indent__l;
+            border-top: 1px solid @prod-questions-color__borders;
+        }
+    }
+
+    .product-answer {
+        border-bottom: 1px solid @prod-questions-color__borders;
+        padding: @indent__m;
+
+        aside {
+            font-size: @prod-questions-size__aside;
+            padding-left: @indent__l;
+        }
     }
 
     .product-question-form {
-        background-color: #EEEEEE;
+        background-color: @prod-questions-color__form-bg;
+        padding: @indent__m;
+
+        .actions {
+            text-align: right;
+        }
     }
 }
 
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+@media all and (min-width: @screen__m) {
     .product-question-form {
         width: 80%;
-        margin: @indent__l auto;
+        margin: @indent__l auto @indent__l (@indent__l * 2);
     }
 }
 
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+@media all and (min-width: @screen__l) {
     .product-question-form {
         width: 60%;
     }
