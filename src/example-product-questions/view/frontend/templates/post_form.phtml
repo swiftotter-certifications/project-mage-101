@@ -18,7 +18,8 @@ $parentIdSuffix = ($parentId) ? '_'.$parentId : '';
 <?php if ($viewModel->customerIsLoggedIn()): ?>
 <div class="product-question-form <?= $escaper->escapeHtmlAttr($viewModel->getCssClass()) ?>">
     <form id="product_question_form<?= $parentIdSuffix ?>" method="post"
-          action="<?= $escaper->escapeUrl($viewModel->getActionUrl()) ?>">
+          action="<?= $escaper->escapeUrl($viewModel->getActionUrl()) ?>"
+            data-mage-init='{"validation": {}}'>
 
         <input type="hidden" name="product_id"
                value="<?= $escaper->escapeHtmlAttr($viewModel->getProductId()) ?>" />
@@ -27,23 +28,26 @@ $parentIdSuffix = ($parentId) ? '_'.$parentId : '';
                    value="<?= $escaper->escapeHtmlAttr($parentId) ?>" />
         <?php endif; ?>
 
-        <fieldset class="fieldset">
-            <div class="field">
+        <fieldset class="fieldset"
+                  data-hasrequired="<?= $escaper->escapeHtmlAttr(__('* Required Fields')) ?>">
+            <div class="field required">
                 <label for="question_customer_nickname<?= $parentIdSuffix ?>" class="label">
                     <span><?= $escaper->escapeHtml(__('Nickname')) ?></span>
                 </label>
                 <div class="control">
                     <input type="text" name="customer_nickname"
-                           id="question_customer_nickname<?= $parentIdSuffix ?>" class="input-text" />
+                           id="question_customer_nickname<?= $parentIdSuffix ?>" class="input-text"
+                            data-validate="{required: true}"/>
                 </div>
             </div>
-            <div class="field">
+            <div class="field required">
                 <label for="question_content<?= $parentIdSuffix ?>" class="label">
                     <span><?= $escaper->escapeHtml($viewModel->getContentLabel()) ?></span>
                 </label>
                 <div class="control">
                     <textarea name="content" id="question_content<?= $parentIdSuffix ?>"
-                              class="input-text"></textarea>
+                              class="input-text"
+                              data-validate="{required: true}"></textarea>
                 </div>
             </div>
         </fieldset>
