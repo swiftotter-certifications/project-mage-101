@@ -23,7 +23,7 @@ $dateFormat = $block->getData('date_format') ?? \IntlDateFormatter::SHORT;
 
     <?php foreach ($questions as $question): ?>
         <article class="product-question">
-            <header>
+            <header data-role="title">
                 <p><?= nl2br($escaper->escapeHtml($question->getContent())) ?></p>
                 <aside><?= __(
                     'Asked by user %1 on %2',
@@ -31,7 +31,7 @@ $dateFormat = $block->getData('date_format') ?? \IntlDateFormatter::SHORT;
                     $escaper->escapeHtml($block->formatDate($question->getCreatedAt(), $dateFormat))
                 ) ?></aside>
             </header>
-            <div class="question-content">
+            <div class="question-content" data-role="content">
                 <?php $answers = $question->getAnswers() ?? []; ?>
                 <?php foreach ($answers as $answer): ?>
                     <section class="product-answer">
@@ -49,3 +49,13 @@ $dateFormat = $block->getData('date_format') ?? \IntlDateFormatter::SHORT;
         </article>
     <?php endforeach; ?>
 </div>
+
+<script type="text/x-magento-init">
+    {
+        ".product-questions": {
+            "productQuestions": {
+                "animationSpeed": 100
+            }
+        }
+    }
+</script>
