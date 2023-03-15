@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @by SwiftOtter, Inc.
+ * @website https://swiftotter.com
+ **/
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="productquestions_post" resource="default" engine="innodb" comment="Product Question Posts">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID" />
+        <column xsi:type="int" name="parent_id" unsigned="true" nullable="true" default="null" comment="Parent ID" />
+        <column xsi:type="int" name="product_id" unsigned="true" nullable="false" comment="Product ID" />
+        <column xsi:type="int" name="customer_id" unsigned="true" nullable="false" comment="Customer ID" />
+        <column xsi:type="varchar" name="customer_nickname" length="255" nullable="false" comment="Customer Nickname" />
+        <column xsi:type="text" name="content" nullable="true" comment="Content" />
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id" />
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="PRODUCTQUESTIONS_POST_PARENT_ID_PRODUCTQUESTIONS_POST_ID"
+                    table="productquestions_post" column="parent_id" referenceTable="productquestions_post"
+                    referenceColumn="id" onDelete="CASCADE" />
+        <constraint xsi:type="foreign" referenceId="PRODUCTQUESTIONS_POST_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID"
+                    table="productquestions_post" column="customer_id" referenceTable="customer_entity"
+                    referenceColumn="entity_id" onDelete="CASCADE" />
+    </table>
+</schema>

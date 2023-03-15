@@ -1,0 +1,19 @@
+{
+    "productquestions_post": {
+        "column": {
+            "id": true,
+            "parent_id": true,
+            "product_id": true,
+            "customer_id": true,
+            "customer_nickname": true,
+            "content": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "PRODUCTQUESTIONS_POST_PARENT_ID_PRODUCTQUESTIONS_POST_ID": true,
+            "PRODUCTQUESTIONS_POST_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID": true
+        }
+    }
+}
