@@ -25,24 +25,36 @@ $dateFormat = $block->getData('date_format') ?? \IntlDateFormatter::SHORT;
         <article class="product-question">
             <header data-role="title">
                 <p><?= nl2br($escaper->escapeHtml($question->getContent())) ?></p>
-                <aside><?= __(
-                        'Asked by user %1 on %2',
-                        '<span class="nickname">' . $escaper->escapeHtml($question->getCustomerNickname()) . '</span>',
-                        $escaper->escapeHtml($block->formatDate($question->getCreatedAt(), $dateFormat))
-                    ) ?></aside>
             </header>
             <div class="question-content" data-role="content">
-                <?php $answers = $question->getAnswers() ?? []; ?>
-                <?php foreach ($answers as $answer): ?>
-                    <section class="product-answer">
-                        <p><?= nl2br($escaper->escapeHtml($answer->getContent())) ?></p>
-                        <aside><?= __(
-                                'Answered by user %1 on %2',
-                                '<span class="nickname">' . $escaper->escapeHtml($answer->getCustomerNickname()) . '</span>',
-                                $escaper->escapeHtml($block->formatDate($answer->getCreatedAt(), $dateFormat))
-                            ) ?></aside>
-                    </section>
-                <?php endforeach; ?>
+                <aside>
+                    <div>
+                        <?= __(
+                            'Asked by user %1',
+                            '<span class="nickname">' . $escaper->escapeHtml($question->getCustomerNickname()) . '</span>',
+                        ) ?>
+                    </div>
+                    <div>
+                        <?= $escaper->escapeHtml($block->formatDate($question->getCreatedAt(), $dateFormat)) ?>
+                    </div>
+                </aside>
+
+                <ul class="product-answers">
+                    <?php $answers = $question->getAnswers() ?? []; ?>
+                    <?php foreach ($answers as $answer): ?>
+                        <li>
+                            <p>
+                                <?= nl2br($escaper->escapeHtml($answer->getContent())) ?>
+                                -
+                                <?= __(
+                                    'Answered by user %1 on %2',
+                                    '<span class="nickname">' . $escaper->escapeHtml($answer->getCustomerNickname()) . '</span>',
+                                    $escaper->escapeHtml($block->formatDate($answer->getCreatedAt(), $dateFormat))
+                                ) ?>
+                            </p>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
 
                 <?= $block->getPostFormHtml((int) $question->getId()) ?>
             </div>
