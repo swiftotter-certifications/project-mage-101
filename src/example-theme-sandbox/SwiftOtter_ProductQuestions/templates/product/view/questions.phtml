@@ -19,6 +19,10 @@ $dateFormat = $block->getData('date_format') ?? \IntlDateFormatter::SHORT;
 <div class="product-questions">
     <h3><?= $escaper->escapeHtml($viewModel->getHeading()) ?></h3>
 
+    <div class="product-questions-disclaimer">
+        <?= $block->getChildHtml('questions.disclaimer') ?>
+    </div>
+
     <?= $block->getChildHtml('post_form') ?>
 
     <?php foreach ($questions as $question): ?>
