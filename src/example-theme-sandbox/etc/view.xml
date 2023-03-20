@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @by SwiftOtter, Inc.
+ * @website https://swiftotter.com
+ **/
+-->
+<view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/view.xsd">
+    <!--
+    <media>
+        <images module="">
+        </images>
+    </media>
+    -->
+
+    <!--
+    <vars module="">
+    </vars>
+    -->
+
+    <!--
+    <exclude>
+    </exclude>
+    -->
+</view>
