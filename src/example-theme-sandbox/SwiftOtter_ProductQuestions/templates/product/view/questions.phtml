@@ -50,11 +50,11 @@ $dateFormat = $block->getData('date_format') ?? \IntlDateFormatter::SHORT;
                             <p>
                                 <?= nl2br($escaper->escapeHtml($answer->getContent())) ?>
                                 -
-                                <?= __(
+                                <span class="aside"><?= __(
                                     'Answered by user %1 on %2',
                                     '<span class="nickname">' . $escaper->escapeHtml($answer->getCustomerNickname()) . '</span>',
                                     $escaper->escapeHtml($block->formatDate($answer->getCreatedAt(), $dateFormat))
-                                ) ?>
+                                    ) ?></span>
                             </p>
                         </li>
                     <?php endforeach; ?>

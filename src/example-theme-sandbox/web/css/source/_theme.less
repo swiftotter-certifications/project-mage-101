@@ -118,9 +118,13 @@
 @button__active__background: @color-gray-darken1;
 
 //  Primary button
+@button-primary__background: #D33E43;
+@button-primary__border: 1px solid #EAC9C1;
 @button-primary__hover__color: @color-white;
+@button-primary__hover__background: lighten(@button-primary__background, 20%);
+@button-primary__hover__border: @button-primary__border;
 @button-primary__active__background: @link__hover__color;
-@button-primary__active__border: 1px solid @link__hover__color;
+@button-primary__active__border: 1px solid #EAC9C1;
 @button-primary__active__color: @color-white;
 
 //  Button with icon
@@ -294,3 +298,10 @@
 //  ---------------------------------------------
 
 @copyright__background-color: @color-gray-middle4;
+
+// Product Questions
+
+@prod-questions-color__header-bg: #EAC9C1;
+@prod-questions-color__form-bg: #EAC9C1;
+@prod-questions-color__nickname: #D33E43;
+@prod-questions-size__header: 1.8rem;
